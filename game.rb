@@ -1,8 +1,7 @@
 require_relative 'computer'
 
 class Game
-    def initialize(p_name)
-        @p_name = p_name
+    def initialize()
         comp = Computer.new()
         @code = comp.get_code
         @turn_counter = 12
@@ -13,6 +12,8 @@ class Game
             player_code = input_code()
             evaluate_code(player_code)
             turn_counter -= 1
+        end
+        lose()
     end
 
     def input_code
@@ -41,6 +42,36 @@ class Game
         puts "You have #{matches[:perfect]} pegs that are in both the correct position and order."
         puts "You have #{matches[:just_color]} pegs that are only the correct color"
         win() if matches[:perfect] == 4
+    end
+
+    def win
+        puts "Congratulations! You win!"
+        puts "Would you like to play again?"
+        input = gets.chomp
+        if input == "y"
+            comp = Computer.new()
+            @code = comp.get_code
+            @turn_counter = 12
+            play_game
+        else
+            puts "Thanks for playing!"
+            exit
+        end
+    end
+
+    def lose
+        puts "Sorry, you lose."
+        puts "Would you like to play again?"
+        input = gets.chomp
+        if input == "y"
+            comp = Computer.new()
+            @code = comp.get_code
+            @turn_counter = 12
+            play_game
+        else
+            puts "Thanks for playing!"
+            exit
+        end
     end
 
     def clone(arr)
