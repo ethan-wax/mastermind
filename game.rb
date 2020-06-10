@@ -13,4 +13,11 @@ class Game
             evaluate_code(player_code)
             turn_counter -= 1
     end
+
+    def input_code
+        puts "Please enter a guess in the form 'a, b, c, d':"
+        input = gets.chomp
+        guess = input.split(", ")
+        return guess
+    end
 end
