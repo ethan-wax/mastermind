@@ -11,12 +11,13 @@ class Game
         while @turn_counter > 0
             player_code = input_code()
             evaluate_code(player_code)
-            turn_counter -= 1
+            @turn_counter -= 1
         end
         lose()
     end
 
     def input_code
+        puts " "
         puts "Colors are: red, blue, green, yellow, orange, purple."
         puts "Please enter a guess in the form 'a, b, c, d':"
         input = gets.chomp
@@ -39,14 +40,15 @@ class Game
                 end
             end
         end
-        puts "You have #{matches[:perfect]} pegs that are in both the correct position and order."
-        puts "You have #{matches[:just_color]} pegs that are only the correct color"
+        puts " "
+        puts "You have #{matches[:perfect]} peg(s) that are in both the correct position and order."
+        puts "You have #{matches[:just_color]} peg(s) that are only the correct color"
         win() if matches[:perfect] == 4
     end
 
     def win
         puts "Congratulations! You win!"
-        puts "Would you like to play again?"
+        puts "Would you like to play again? (y/n)"
         input = gets.chomp
         if input == "y"
             comp = Computer.new()
@@ -61,7 +63,7 @@ class Game
 
     def lose
         puts "Sorry, you lose."
-        puts "Would you like to play again?"
+        puts "Would you like to play again? (y/n)"
         input = gets.chomp
         if input == "y"
             comp = Computer.new()
@@ -76,5 +78,9 @@ class Game
 
     def clone(arr)
         return arr.map {|n| n}
+    end
+
+    def get_code
+        return @code
     end
 end
