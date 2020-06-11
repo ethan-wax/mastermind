@@ -9,6 +9,8 @@ class Game
 
     def play_game
         while @turn_counter > 0
+            puts ""
+            puts "You have #{@turn_counter} turn(s) remaining." 
             player_code = input_code()
             evaluate_code(player_code)
             @turn_counter -= 1
@@ -63,6 +65,7 @@ class Game
 
     def lose
         puts "Sorry, you lose."
+        puts "The code was #{get_code}."
         puts "Would you like to play again? (y/n)"
         input = gets.chomp
         if input == "y"
